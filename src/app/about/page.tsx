@@ -1,6 +1,7 @@
 "use client"
 
 import React from 'react'
+import Link from 'next/link'
 
 export default function About() {
   return (
@@ -92,12 +93,12 @@ export default function About() {
 
           {/* CTA Section */}
           <div className="text-center">
-            <a
+            <Link
               href="/#search"
               className="inline-block bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-300"
             >
               Start Finding Scholarships
-            </a>
+            </Link>
           </div>
         </div>
       </div>
