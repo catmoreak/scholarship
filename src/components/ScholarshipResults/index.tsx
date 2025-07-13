@@ -13,7 +13,7 @@ const ScholarshipResults: React.FC<ScholarshipResultsProps> = ({ scholarships, s
     return (
       <div className="text-center py-12">
         <p className="text-purple-200 text-lg">
-          Fill out the form above to find scholarships you're eligible for.
+          Fill out the form above to find scholarships you&apos;re eligible for.
         </p>
       </div>
     );
@@ -33,7 +33,7 @@ const ScholarshipResults: React.FC<ScholarshipResultsProps> = ({ scholarships, s
   return (
     <div className="space-y-6">
       <h3 className="text-2xl font-bold text-white text-center">
-        {scholarships.length} Scholarship{scholarships.length !== 1 ? 's' : ''} Found
+        {scholarships.length} Scholarship{scholarships.length !== 1 ? &apos;s&apos; : &apos;&apos;} Found
       </h3>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

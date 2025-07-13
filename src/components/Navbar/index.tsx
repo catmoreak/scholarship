@@ -1,6 +1,7 @@
 "use client"
 
 import React from 'react'
+import Link from 'next/link'
 
 const Navbar = () => {
   return (
@@ -14,9 +15,9 @@ const Navbar = () => {
           </div>
 
           <div className="hidden md:flex items-center space-x-6">
-            <a href="/" className="text-purple-200 hover:text-white transition-colors duration-300">
+            <Link href="/" className="text-purple-200 hover:text-white transition-colors duration-300">
               Home
-            </a>
+            </Link>
             <a href="#search" className="text-purple-200 hover:text-white transition-colors duration-300">
               Find Scholarships
             </a>

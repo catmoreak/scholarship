@@ -10,7 +10,16 @@ export default function Home() {
   const [matchedScholarships, setMatchedScholarships] = useState<Scholarship[]>([])
   const [searchPerformed, setSearchPerformed] = useState(false)
 
-  const handleSearch = (criteria: any) => {
+  const handleSearch = (criteria: {
+    class: string;
+    gender: string;
+    religion: string;
+    caste: string;
+    state: string;
+    familyIncome: string;
+    academicPercentage: string;
+    subjects: string;
+  }) => {
     const matches = matchScholarships({
       class: criteria.class,
       gender: criteria.gender,
@@ -58,7 +67,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto text-center">
           <h2 className="text-4xl font-bold text-white mb-4">Why Choose Our Platform?</h2>
           <p className="text-purple-200 text-xl mb-12 max-w-3xl mx-auto">
-            We've helped thousands of Indian students find and secure scholarships worth crores of rupees
+            We&apos;ve helped thousands of Indian students find and secure scholarships worth crores of rupees
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
