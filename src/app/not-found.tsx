@@ -9,8 +9,8 @@ export default function NotFound() {
             <h1 className="text-8xl font-bold text-white mb-4">404</h1>
             <h2 className="text-3xl font-bold text-white mb-4">Page Not Found</h2>
             <p className="text-purple-200 text-lg mb-8">
-              Sorry, we couldn't find the scholarship page you're looking for. 
-              It might have been moved or doesn't exist.
+              Sorry, we couldn&apos;t find the scholarship page you&apos;re looking for. 
+              It might have been moved or doesn&apos;t exist.
             </p>
           </div>
           
