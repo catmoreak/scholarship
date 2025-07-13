@@ -21,9 +21,9 @@ const Navbar = () => {
             <a href="#search" className="text-purple-200 hover:text-white transition-colors duration-300">
               Find Scholarships
             </a>
-            <a href="#" className="text-purple-200 hover:text-white transition-colors duration-300">
+            <Link href="/about" className="text-purple-200 hover:text-white transition-colors duration-300">
               About
-            </a>
+            </Link>
           </div>
         </div>
       </div>
