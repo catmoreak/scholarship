@@ -6,8 +6,6 @@ import {
   X, 
   Send, 
   Minimize2,
-  Volume2,
-  VolumeX,
   RotateCcw
 } from 'lucide-react'
 

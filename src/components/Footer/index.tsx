@@ -2,7 +2,6 @@
 
 import React from 'react'
 import { 
-  Award, 
   Mail, 
   Phone, 
   MapPin, 
@@ -14,8 +13,7 @@ import {
   ExternalLink,
   GraduationCap,
   Users,
-  BookOpen,
-  Shield
+  BookOpen
 } from 'lucide-react'
 
 const Footer = () => {

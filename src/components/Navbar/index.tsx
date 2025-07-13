@@ -1,7 +1,7 @@
 "use client"
 
 import React from 'react'
-import { Home, GraduationCap, User, Search, Award, Menu, X } from 'lucide-react'
+import { Home, GraduationCap, User, Search, Menu, X } from 'lucide-react'
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false)
