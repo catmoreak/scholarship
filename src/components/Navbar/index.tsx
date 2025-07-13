@@ -29,7 +29,7 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-4">
             <a 
-              href="#" 
+              href="/" 
               className="flex items-center space-x-2 text-purple-100 hover:text-white transition-all duration-300 transform hover:scale-105 hover:bg-gradient-to-r hover:from-purple-600/30 hover:to-indigo-600/30 hover:shadow-lg hover:shadow-purple-500/20 px-4 py-2 rounded-xl backdrop-blur-sm border border-transparent hover:border-purple-400/30 group"
             >
               <Home className="h-4 w-4 transition-transform duration-300 group-hover:bounce drop-shadow-sm" />
@@ -39,7 +39,7 @@ const Navbar = () => {
               </span>
             </a>
             <a 
-              href="#" 
+              href="#search" 
               className="flex items-center space-x-2 text-purple-100 hover:text-white transition-all duration-300 transform hover:scale-105 hover:bg-gradient-to-r hover:from-purple-600/30 hover:to-indigo-600/30 hover:shadow-lg hover:shadow-purple-500/20 px-4 py-2 rounded-xl backdrop-blur-sm border border-transparent hover:border-purple-400/30 group"
             >
               <Search className="h-4 w-4 transition-transform duration-300 group-hover:rotate-90 drop-shadow-sm" />
