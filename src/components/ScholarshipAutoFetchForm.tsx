@@ -49,8 +49,9 @@ export default function ScholarshipAutoFetchForm() {
       const data = await res.json();
       if (data.error) setError(data.error);
       else setResults(data.results || []);
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err) {
+      if (err instanceof Error) setError(err.message);
+      else setError('An error occurred.');
     } finally {
       setLoading(false);
     }

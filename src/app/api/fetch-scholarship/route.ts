@@ -17,14 +17,17 @@ export async function GET(request: Request) {
   try {
     const res = await fetch(endpoint);
     const data = await res.json();
+    // Debug: log the response from SerpAPI
+    console.log('SerpAPI response:', JSON.stringify(data, null, 2));
     // Extract richer details from organic_results
-    const results = data.organic_results?.slice(0, 3).map((item: any) => ({
+    const results = data.organic_results?.slice(0, 3).map((item: { title: string; snippet: string; link: string }) => ({
       title: item.title,
       snippet: item.snippet,
       link: item.link
     })) || [];
     return NextResponse.json({ results });
   } catch (err) {
+    console.error('SerpAPI fetch error:', err);
     return NextResponse.json({ error: 'Failed to fetch from SerpAPI.' }, { status: 500 });
   }
 }
