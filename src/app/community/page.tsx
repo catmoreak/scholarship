@@ -14,7 +14,14 @@ const db = getDatabase(app, dbUrl);
 
 const CommunityPage = () => {
 
-  const [messages, setMessages] = useState<any[]>([]);
+  type Message = {
+    id: string;
+    text: string;
+    user: string;
+    color?: string;
+    timestamp?: number;
+  };
+  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [sending, setSending] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -30,8 +37,8 @@ const CommunityPage = () => {
     const handle = onValue(messagesRef, (snapshot) => {
       const data = snapshot.val();
       console.log('Realtime DB snapshot:', data);
-      const msgs = data
-        ? Object.entries(data).map(([id, val]: any) => ({ id, ...val }))
+      const msgs: Message[] = data
+        ? Object.entries(data).map(([id, val]) => ({ id, ...(val as Omit<Message, 'id'>) }))
         : [];
       msgs.sort((a, b) => (a.timestamp || 0) - (b.timestamp || 0));
       setMessages(msgs);
@@ -79,11 +86,11 @@ const CommunityPage = () => {
             {messages.map((msg) => {
               const isYou = msg.user === 'You';
               // Green for 'You', Red for others
-              let bg = isYou ? 'bg-green-50' : 'bg-red-50';
-              let border = isYou ? 'border-green-200' : 'border-red-200';
-              let text = isYou ? 'text-green-900' : 'text-red-900';
-              let avatarBg = isYou ? 'bg-green-200' : 'bg-red-200';
-              let avatarText = isYou ? 'text-green-800' : 'text-red-800';
+              const bg = isYou ? 'bg-green-50' : 'bg-red-50';
+              const border = isYou ? 'border-green-200' : 'border-red-200';
+              const text = isYou ? 'text-green-900' : 'text-red-900';
+              const avatarBg = isYou ? 'bg-green-200' : 'bg-red-200';
+              const avatarText = isYou ? 'text-green-800' : 'text-red-800';
               return (
                 <div key={msg.id} className={`mb-6 flex items-end gap-3 ${isYou ? 'flex-row-reverse' : ''}`}>
                   <div className={`w-11 h-11 rounded-full flex items-center justify-center font-bold text-lg shadow border ${avatarBg} ${avatarText}`}>{msg.user?.[0] || '?'}</div>
