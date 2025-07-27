@@ -3,7 +3,9 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from 'react';
+
 import { getDatabase, ref, push, onValue } from 'firebase/database';
+import GoogleIcon from './GoogleIcon';
 import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut, User } from 'firebase/auth';
 import { app } from '@/firebase/firebaseConfig';
 
@@ -112,15 +114,16 @@ const CommunityPage = () => {
 
   if (!user) {
     return (
-      <div className="min-h-screen w-full flex flex-col items-center justify-center bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900" style={{ fontFamily: '"Press Start 2P", monospace' }}>
+      <div className="min-h-screen w-full flex flex-col items-center justify-center bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900 font-sans">
         <div className="bg-white/90 rounded-2xl shadow-xl p-10 flex flex-col items-center border border-purple-200 animate-fade-in-slow">
           <h2 className="text-2xl font-bold mb-4 text-purple-900">Sign in to join the Community Chat</h2>
           <button
             onClick={handleGoogleSignIn}
-            className="flex items-center gap-2 bg-gradient-to-r from-purple-500 to-indigo-500 text-white px-6 py-3 rounded-lg font-bold shadow-md text-base border border-purple-200 hover:scale-105 transition-all duration-150"
+            className="flex items-center gap-3 bg-gradient-to-r from-purple-500 to-indigo-500 text-white px-6 py-3 rounded-lg font-bold shadow-md text-base border border-purple-200 hover:scale-105 transition-all duration-150"
+            style={{ fontFamily: 'inherit' }}
           >
-            <svg width="24" height="24" viewBox="0 0 24 24"><g><path fill="#4285F4" d="M21.805 10.023h-9.765v3.977h5.617c-.242 1.242-1.484 3.648-5.617 3.648-3.375 0-6.125-2.789-6.125-6.148 0-3.359 2.75-6.148 6.125-6.148 1.922 0 3.211.82 3.953 1.523l2.703-2.625c-1.711-1.57-3.914-2.523-6.656-2.523-5.523 0-10 4.477-10 10s4.477 10 10 10c5.773 0 9.594-4.055 9.594-9.773 0-.656-.07-1.156-.156-1.652z"/><path fill="#34A853" d="M3.545 7.548l3.285 2.409c.895-1.7 2.66-2.909 4.67-2.909 1.27 0 2.41.438 3.305 1.16l2.48-2.48c-1.57-1.453-3.617-2.348-5.785-2.348-3.242 0-6.016 2.07-7.07 4.968z"/><path fill="#FBBC05" d="M12 22c2.43 0 4.477-.805 5.953-2.188l-2.734-2.234c-.75.508-1.703.82-3.219.82-2.457 0-4.539-1.656-5.285-3.883l-3.32 2.57c1.508 3.008 4.734 5.015 8.605 5.015z"/><path fill="#EA4335" d="M21.805 10.023h-9.765v3.977h5.617c-.242 1.242-1.484 3.648-5.617 3.648-3.375 0-6.125-2.789-6.125-6.148 0-3.359 2.75-6.148 6.125-6.148 1.922 0 3.211.82 3.953 1.523l2.703-2.625c-1.711-1.57-3.914-2.523-6.656-2.523-5.523 0-10 4.477-10 10s4.477 10 10 10c5.773 0 9.594-4.055 9.594-9.773 0-.656-.07-1.156-.156-1.652z"/></g></svg>
-            Sign in with Google
+            <GoogleIcon style={{ display: 'inline-block', verticalAlign: 'middle' }} />
+            <span>Sign in with Google</span>
           </button>
         </div>
       </div>
@@ -128,19 +131,16 @@ const CommunityPage = () => {
   }
 
   return (
-    <div className="min-h-screen w-full flex flex-col bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900" style={{ fontFamily: '"Press Start 2P", monospace' }}>
+    <div className="min-h-screen w-full flex flex-col bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900 font-sans">
       {/* Hero Section */}
-      <section className="w-full flex flex-col items-center justify-center py-10 bg-gradient-to-b from-purple-900/90 via-purple-800/70 to-transparent animate-fade-in-slow border-b-4 border-purple-800/60">
+      <section className="w-full flex flex-col items-center justify-center py-10 bg-gradient-to-b from-purple-900/90 via-purple-800/70 to-transparent animate-fade-in-slow border-b-4 border-purple-800/60 rounded-b-3xl">
         <div className="flex items-center gap-4 mb-2">
-          {user.photoURL && (
-            <img src={user.photoURL} alt="avatar" className="w-10 h-10 rounded-full border-2 border-purple-300 shadow" />
-          )}
-          <h1 className="text-4xl md:text-5xl font-extrabold text-purple-100 tracking-widest drop-shadow-[0_2px_0_#a78bfa] animate-fade-in" style={{ fontFamily: '"Press Start 2P", monospace', letterSpacing: '0.1em' }}>Community Chat</h1>
+          <h1 className="text-4xl md:text-5xl font-extrabold text-purple-100 tracking-widest drop-shadow-[0_2px_0_#a78bfa] animate-fade-in" style={{ letterSpacing: '0.1em' }}>Community Chat</h1>
         </div>
-        <p className="text-purple-200 text-center text-base md:text-lg max-w-2xl font-medium animate-fade-in-slow" style={{ fontFamily: '"Press Start 2P", monospace' }}>A fun, friendly space to connect and discuss scholarships with others. Share tips, ask questions, and help each other succeed!</p>
+        <p className="text-purple-200 text-center text-base md:text-lg max-w-2xl font-medium animate-fade-in-slow">A fun, friendly space to connect and discuss scholarships with others. Share tips, ask questions, and help each other succeed!</p>
         <button onClick={handleSignOut} className="mt-4 px-4 py-2 bg-purple-700 text-white rounded shadow hover:bg-purple-800 transition-all text-sm">Sign Out</button>
       </section>
-      {/* Centered glass chat card */}
+      {/* Centered blocky chat card */}
       <div className="flex-1 flex items-center justify-center w-full px-2 pb-8">
         <div className="w-full max-w-2xl bg-white/90 rounded-2xl shadow-xl p-0 flex flex-col items-stretch border border-purple-200 animate-fade-in-slow">
           {/* Chat area and input */}
@@ -213,11 +213,7 @@ const CommunityPage = () => {
               className={`bg-gradient-to-r from-purple-500 to-indigo-500 text-white px-6 py-3 rounded-lg font-bold shadow-md text-base border border-purple-200 transition-all duration-150 ${sending || !input.trim() || sendCooldown > 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
               disabled={sending || !input.trim() || sendCooldown > 0}
             >
-              {sending
-                ? 'Sending...'
-                : sendCooldown > 0
-                  ? `Wait ${sendCooldown}s`
-                  : 'Send'}
+              {sending ? 'Sending...' : sendCooldown > 0 ? `Wait ${sendCooldown}s` : 'Send'}
             </button>
           </form>
         </div>
