@@ -1,33 +1,28 @@
-
-
 "use client";
 
+import GoogleIcon from './GoogleIcon';
 import React, { useEffect, useRef, useState } from 'react';
 
 import { getDatabase, ref, push, onValue } from 'firebase/database';
-import GoogleIcon from './GoogleIcon';
 import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut, User } from 'firebase/auth';
 import { app } from '@/firebase/firebaseConfig';
 
-
-
-
 const dbUrl = process.env.NEXT_PUBLIC_FIREBASE_DB_URL;
 const db = getDatabase(app, dbUrl);
-
 const auth = getAuth(app);
 
-const CommunityPage = () => {
 
-  type Message = {
-    id: string;
-    text: string;
-    user: string;
-    uid?: string;
-    color?: string;
-    timestamp?: number;
-    photoURL?: string;
-  };
+type Message = {
+  id: string;
+  text: string;
+  user: string;
+  uid?: string;
+  color?: string;
+  timestamp?: number;
+  photoURL?: string;
+};
+
+const CommunityPage = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [sending, setSending] = useState(false);
@@ -48,8 +43,13 @@ const CommunityPage = () => {
     const provider = new GoogleAuthProvider();
     try {
       await signInWithPopup(auth, provider);
-    } catch (err) {
-      alert('Google sign-in failed');
+    } catch {
+      // Wait 1 second, then check if user is signed in
+      setTimeout(() => {
+        if (!auth.currentUser) {
+          alert('Google sign-in failed');
+        }
+      }, 1000);
     }
   };
 
@@ -96,8 +96,8 @@ const CommunityPage = () => {
       });
       setInput('');
       setSendCooldown(5);
-    } catch (err) {
-      console.error('Failed to send message', err);
+    } catch {
+      console.error('Failed to send message');
       alert('Failed to send message');
     }
     setSending(false);
