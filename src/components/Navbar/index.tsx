@@ -22,6 +22,9 @@ const Navbar = () => {
             <Link href="/auto-fetch-scholarship" className="text-purple-200 hover:text-white font-semibold transition-colors duration-300">
               Auto Fetch
             </Link>
+            <Link href="/community" className="text-purple-200 hover:text-white font-semibold transition-colors duration-300">
+              Community
+            </Link>
             <Link href="/about" className="text-purple-200 hover:text-white font-semibold transition-colors duration-300">
               About
             </Link>
