@@ -4,7 +4,7 @@ const ChatBot = () => {
   const [messages, setMessages] = useState<{ role: string; content: string }[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   async function sendMessage(e: React.FormEvent) {
     e.preventDefault();
