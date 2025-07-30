@@ -1,3 +1,14 @@
+/* Pulsing status dot animations for community chat */
+@keyframes pulse-green {
+  0%, 100% { box-shadow: 0 0 0 0 #22c55e66; }
+  50% { box-shadow: 0 0 0 6px #22c55e22; }
+}
+.animate-pulse-green { animation: pulse-green 1.2s infinite; }
+@keyframes pulse-red {
+  0%, 100% { box-shadow: 0 0 0 0 #ef444466; }
+  50% { box-shadow: 0 0 0 6px #ef444422; }
+}
+.animate-pulse-red { animation: pulse-red 1.2s infinite; }
 /* Community Chat Animations and Custom Scrollbar */
 .animate-fade-in { animation: fadeIn 0.8s cubic-bezier(.4,0,.2,1) both; }
 .animate-fade-in-slow { animation: fadeIn 1.5s cubic-bezier(.4,0,.2,1) both; }

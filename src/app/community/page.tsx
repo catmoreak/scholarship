@@ -1,5 +1,6 @@
 "use client";
 
+
 import GoogleIcon from './GoogleIcon';
 import React, { useEffect, useRef, useState } from 'react';
 
@@ -23,6 +24,15 @@ type Message = {
 };
 
 const CommunityPage = () => {
+  // Google sign-in handler
+  const handleGoogleSignIn = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      await signInWithPopup(auth, provider);
+    } catch {
+      alert('Google sign-in failed');
+    }
+  };
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [sending, setSending] = useState(false);
@@ -31,27 +41,18 @@ const CommunityPage = () => {
   const [sendCooldown, setSendCooldown] = useState(0);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   // Listen for auth state changes
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       setUser(firebaseUser);
-    });
-    return () => unsubscribe();
-  }, []);
-
-  // Google sign in
-  const handleGoogleSignIn = async () => {
-    const provider = new GoogleAuthProvider();
-    try {
-      await signInWithPopup(auth, provider);
-    } catch {
-      // Wait 1 second, then check if user is signed in
       setTimeout(() => {
         if (!auth.currentUser) {
           alert('Google sign-in failed');
         }
       }, 1000);
-    }
-  };
+    });
+    return () => unsubscribe();
+  }, []);
 
   // Sign out
   const handleSignOut = async () => {
@@ -189,6 +190,7 @@ const CommunityPage = () => {
                 >
                   {/* Avatar */}
                   <div className="flex-shrink-0 mr-2">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     {avatarUrl && !imgError ? (
                       <img
                         src={avatarUrl}
@@ -218,7 +220,15 @@ const CommunityPage = () => {
                           </svg>
                         </button>
                       )}
-                      <span className={`font-semibold text-xs ${isYou ? 'text-green-700' : 'text-gray-700'}`}>{msg.user || 'User'}</span>
+                      <span className={`font-semibold text-xs ${isYou ? 'text-green-700' : 'text-gray-700'} flex items-center`}>
+                        {/* Online/offline status: green for you, red for others */}
+                        <span
+                          className={`inline-block w-2.5 h-2.5 rounded-full mr-1.5 border ${isYou ? 'animate-pulse-green' : 'animate-pulse-red'}`}
+                          style={{ background: isYou ? '#22c55e' : '#ef4444', borderColor: isYou ? '#16a34a' : '#b91c1c' }}
+                          title={isYou ? 'Online (You)' : 'Offline (Placeholder)'}
+                        ></span>
+                        {msg.user || 'User'}
+                      </span>
                       <span className="text-[10px] text-gray-400">{msg.timestamp ? new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : ''}</span>
                       {isYou && <span className="ml-1 text-green-500">✔✔</span>}
                     </div>
