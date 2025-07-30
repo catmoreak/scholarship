@@ -185,10 +185,10 @@ const CommunityPage = () => {
               return (
                 <div
                   key={msg.id}
-                  className={`mb-5 flex w-full ${align} ${flexDir}`}
+                  className={`mb-6 flex w-full ${align} ${flexDir}`}
                 >
                   {/* Avatar */}
-                  <div className="flex-shrink-0">
+                  <div className="flex-shrink-0 mr-2">
                     {avatarUrl && !imgError ? (
                       <img
                         src={avatarUrl}
@@ -205,16 +205,16 @@ const CommunityPage = () => {
                   {/* Message bubble */}
                   <div className={`flex flex-col ${isYou ? 'items-end' : 'items-start'} ${isYou ? 'ml-auto mr-0' : 'ml-0 mr-auto'} max-w-[75%]`}>
                     <div className="flex items-center gap-2 mb-1">
-                      {/* Delete button for your own messages, left of name */}
+                      {/* Delete button for your own messages, left of name, more subtle and modern */}
                       {isYou && (
                         <button
                           onClick={handleDelete}
-                          className="bg-white border border-red-300 hover:bg-red-100 text-red-500 rounded-full p-1 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-red-200"
+                          className="bg-transparent border-none text-gray-300 hover:text-red-500 rounded-full p-1.5 transition-colors focus:outline-none focus:ring-2 focus:ring-red-200"
                           title="Delete this message"
-                          style={{ width: 24, height: 24, display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: 4 }}
+                          style={{ width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: 4 }}
                         >
-                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 20 20" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6.5 7.5h7M8.5 7.5V6a1.5 1.5 0 011.5-1.5h0a1.5 1.5 0 011.5 1.5v1.5m2 0v7.5a1.5 1.5 0 01-1.5 1.5h-6A1.5 1.5 0 016 15V7.5h8zm-5 2.5v3m3-3v3" />
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 20 20" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.7} d="M6.5 7.5h7M8.5 7.5V6a1.5 1.5 0 011.5-1.5h0a1.5 1.5 0 011.5 1.5v1.5m2 0v7.5a1.5 1.5 0 01-1.5 1.5h-6A1.5 1.5 0 016 15V7.5h8zm-5 2.5v3m3-3v3" />
                           </svg>
                         </button>
                       )}
@@ -222,7 +222,7 @@ const CommunityPage = () => {
                       <span className="text-[10px] text-gray-400">{msg.timestamp ? new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : ''}</span>
                       {isYou && <span className="ml-1 text-green-500">✔✔</span>}
                     </div>
-                    <div className={`rounded-2xl px-5 py-3 shadow border ${bubbleBg} ${bubbleText} font-mono text-sm`} style={{ wordBreak: 'break-word' }}>
+                    <div className={`rounded-2xl px-6 py-3 shadow border ${bubbleBg} ${bubbleText} font-mono text-base`} style={{ wordBreak: 'break-word', minHeight: 40, letterSpacing: '0.01em', lineHeight: 1.6 }}>
                       {msg.text}
                     </div>
                   </div>
