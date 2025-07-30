@@ -3,7 +3,7 @@
 import GoogleIcon from './GoogleIcon';
 import React, { useEffect, useRef, useState } from 'react';
 
-import { getDatabase, ref, push, onValue } from 'firebase/database';
+import { getDatabase, ref, push, onValue, remove } from 'firebase/database';
 import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut, User } from 'firebase/auth';
 import { app } from '@/firebase/firebaseConfig';
 
@@ -172,6 +172,16 @@ const CommunityPage = () => {
                 avatarUrl = msg.photoURL || '';
               }
               const imgError = imgErrorMap[msg.id] || false;
+              // Delete handler
+              const handleDelete = async () => {
+                if (!msg.id) return;
+                if (!window.confirm('Delete this message?')) return;
+                try {
+                  await remove(ref(db, `community-messages/${msg.id}`));
+                } catch {
+                  alert('Failed to delete message.');
+                }
+              };
               return (
                 <div
                   key={msg.id}
@@ -193,13 +203,28 @@ const CommunityPage = () => {
                     )}
                   </div>
                   {/* Message bubble */}
-                  <div className={`flex flex-col ${isYou ? 'items-end' : 'items-start'} ${isYou ? 'ml-auto mr-0' : 'ml-0 mr-auto'} max-w-[75%]`}> 
+                  <div className={`flex flex-col ${isYou ? 'items-end' : 'items-start'} ${isYou ? 'ml-auto mr-0' : 'ml-0 mr-auto'} max-w-[75%]`}>
                     <div className="flex items-center gap-2 mb-1">
+                      {/* Delete button for your own messages, left of name */}
+                      {isYou && (
+                        <button
+                          onClick={handleDelete}
+                          className="bg-white border border-red-300 hover:bg-red-100 text-red-500 rounded-full p-1 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-red-200"
+                          title="Delete this message"
+                          style={{ width: 24, height: 24, display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: 4 }}
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 20 20" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6.5 7.5h7M8.5 7.5V6a1.5 1.5 0 011.5-1.5h0a1.5 1.5 0 011.5 1.5v1.5m2 0v7.5a1.5 1.5 0 01-1.5 1.5h-6A1.5 1.5 0 016 15V7.5h8zm-5 2.5v3m3-3v3" />
+                          </svg>
+                        </button>
+                      )}
                       <span className={`font-semibold text-xs ${isYou ? 'text-green-700' : 'text-gray-700'}`}>{msg.user || 'User'}</span>
                       <span className="text-[10px] text-gray-400">{msg.timestamp ? new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : ''}</span>
                       {isYou && <span className="ml-1 text-green-500">✔✔</span>}
                     </div>
-                    <div className={`rounded-2xl px-5 py-3 shadow border ${bubbleBg} ${bubbleText} font-mono text-sm`} style={{ wordBreak: 'break-word' }}>{msg.text}</div>
+                    <div className={`rounded-2xl px-5 py-3 shadow border ${bubbleBg} ${bubbleText} font-mono text-sm`} style={{ wordBreak: 'break-word' }}>
+                      {msg.text}
+                    </div>
                   </div>
                 </div>
               );
