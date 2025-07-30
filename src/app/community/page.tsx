@@ -209,12 +209,12 @@ const CommunityPage = () => {
                       {isYou && (
                         <button
                           onClick={handleDelete}
-                          className="bg-transparent border-none text-gray-300 hover:text-red-500 rounded-full p-1.5 transition-colors focus:outline-none focus:ring-2 focus:ring-red-200"
+                          className="bg-transparent border-none text-gray-300 hover:text-red-500 rounded-full p-2 transition-colors focus:outline-none focus:ring-2 focus:ring-red-200"
                           title="Delete this message"
-                          style={{ width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: 4 }}
+                          style={{ width: 40, height: 40, display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: 6 }}
                         >
-                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 20 20" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.7} d="M6.5 7.5h7M8.5 7.5V6a1.5 1.5 0 011.5-1.5h0a1.5 1.5 0 011.5 1.5v1.5m2 0v7.5a1.5 1.5 0 01-1.5 1.5h-6A1.5 1.5 0 016 15V7.5h8zm-5 2.5v3m3-3v3" />
+                          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 7h12M9 7V5a2 2 0 012-2h2a2 2 0 012 2v2m2 0v12a2 2 0 01-2 2H8a2 2 0 01-2-2V7h12zm-7 4v6m4-6v6" />
                           </svg>
                         </button>
                       )}
