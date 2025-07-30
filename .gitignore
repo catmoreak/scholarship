@@ -16,7 +16,7 @@
 # next.js
 /.next/
 /out/
-
+cpp-notes.md
 # production
 /build
 # misc

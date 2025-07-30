@@ -83,6 +83,15 @@ const CommunityPage = () => {
   const handleSend = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim() || !user || sendCooldown > 0) return;
+    // Disallow all links (URLs) and adult-related content in messages
+    const urlRegex = /(https?:\/\/|www\.|[a-zA-Z0-9.-]+\.(com|net|org|io|gov|edu|co|in|info|me|xyz|app|dev|ai|ca|uk|us|biz|site|online|store|tech|tv|cc|ru|cn|de|jp|fr|au|es|it|nl|se|no|fi|pl|ch|be|at|dk|tr|ir|ua|cz|gr|pt|ro|hu|sk|bg|lt|lv|ee|hr|si|rs|by|kz|ge|az|md|am|kg|uz|tj|tm|mn|vn|kr|my|sg|th|hk|tw|ph|id|pk|bd|lk|np|sa|ae|qa|kw|om|bh|jo|lb|sy|iq|ye|il|eg|ma|dz|tn|ly|sd|ss|et|ke|tz|ug|rw|bi|mw|zm|zm|zw|ao|cm|gh|ng|sn|ci|ml|bf|ne|tg|gm|sl|lr|gw|cv|st|gq|ga|cg|cd|cf|td|er|dj|so|mg|mu|sc|km|za|mz|bw|na|sz|ls|eg|ma|dz|tn|ly|sd|ss|et|ke|tz|ug|rw|bi|mw|zm|zm|zw|ao|cm|gh|ng|sn|ci|ml|bf|ne|tg|gm|sl|lr|gw|cv|st|gq|ga|cg|cd|cf|td|er|dj|so|mg|mu|sc|km|za|mz|bw|na|sz|ls|arpa|mil|int|pro|mobi|name|aero|jobs|museum|xxx|sex|adult|porn|cam|hot|club|red|tube|date|love|escort|lingerie|fetish|nude|naked|playboy|lust|erotic|babes|bdsm|kink|voyeur|amateur|anal|oral|blowjob|handjob|cum|dildo|pussy|cock|boobs|tits|milf|teen|gay|lesbian|trans|shemale|hentai|incest|taboo|bdsm|fetish|escort|escortservice|callgirl|callboy|gigolo|swinger|swingers|swing|swinging|swingclub|swingersclub|swingersparty|swingerparty|swingerdate|swingerdating|swingermeet|swingerfinder|swingersearch|swingercommunity|swingerforum|swingerchat|swingerweb|swingerworld|swingerzone|swingerlife|swingerplace|swingerroom|swingerhouse|swingerhotel|swingerresort|swingercruise|swingertravel|swingertrip|swingerholiday|swingervacation|swingerclubhouse|swingerbar|swingerpub|swingercafe|swingerrestaurant|swingerpartyhouse|swingerpartyclub|swingerpartynight|swingerpartyevent|swingerpartytour|swingerpartydestination|swingerpartylocation|swingerpartyplace|swingerpartyspot|swingerpartyvenue|swingerpartyarea|swingerpartycity|swingerpartycountry|swingerpartyregion|swingerpartyzone|swingerpartyworld|swingerpartynet|swingerpartyorg|swingerpartycom|swingerpartyonline|swingerpartysite|swingerpartyweb|swingerpartyforum|swingerpartycommunity|swingerpartychat|swingerpartyroom|swingerpartyhouse|swingerpartyhotel|swingerpartyresort|swingerpartycruise|swingerpartytravel|swingerpartytrip|swingerpartyholiday|swingerpartyvacation)\b)/i;
+    const adultKeywords = [
+      'porn', 'xxx', 'sex', 'adult', 'cam', 'escort', 'fetish', 'nude', 'naked', 'playboy', 'lust', 'erotic', 'babes', 'bdsm', 'kink', 'voyeur', 'amateur', 'anal', 'oral', 'blowjob', 'handjob', 'cum', 'dildo', 'pussy', 'cock', 'boobs', 'tits', 'milf', 'teen', 'gay', 'lesbian', 'trans', 'shemale', 'hentai', 'incest', 'taboo'
+    ];
+    if (urlRegex.test(input) || adultKeywords.some(word => input.toLowerCase().includes(word))) {
+      alert('Links are not allowed');
+      return;
+    }
     setSending(true);
     try {
       const messagesRef = ref(db, 'community-messages');
